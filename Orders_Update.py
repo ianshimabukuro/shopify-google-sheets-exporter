@@ -1,5 +1,5 @@
 import shopify
-from values import*
+from ids_passwords_strings.values import*
 import pandas as pd
 from google_modules.googleSheets import*
 from google_modules.googleAuth import*
@@ -48,4 +48,4 @@ with open('orders.csv',encoding="utf8") as f:
     to = list(tuple(line) for line in reader)
 
 UpdateValue(creds, spreadsheetID=GoogleSheetID, range='Orders!A1', values=to)
-os.remove("C:/Users/akio_/PycharmProjects/ShopifyAPIGSExporter/venv/orders.csv")
+os.remove("C:/Users/akio_/PycharmProjects/ShopifyAPIGSExporter/orders.csv")

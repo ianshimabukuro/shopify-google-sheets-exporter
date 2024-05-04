@@ -1,33 +1,24 @@
 import shopify
-from values import*
+from ids_passwords_strings.values import*
 import pandas as pd
 from google_modules.googleSheets import*
 from google_modules.googleAuth import*
+from shopify_modules.utility import *
 import os.path
 import csv
 import google.auth.exceptions
-
-
-def get_all_resources(resource_type, **kwargs):
-    resource_count = resource_type.count(**kwargs)
-    resources = []
-    if resource_count > 0:
-        page=resource_type.find(**kwargs)
-        resources.extend(page)
-        while page.has_next_page():
-            page = page.next_page()
-            resources.extend(page)
-    return resources
 
 session = shopify.Session(shop_url, api_version, ac_tok)
 shopify.ShopifyResource.activate_session(session)
 
 products_list = []
+print("Start retrieving")
 products = get_all_resources(shopify.Product)
+print("Finished retrieving")
 for product in products:
     products_list.append(product.attributes)
 products_df = pd.DataFrame(products_list)
-#json_data=products_df.to_json(orient='records')
+products_df.to_csv('products.csv', index=False)
 
 print("Authenticating Google API...")
 try:
@@ -43,6 +34,5 @@ print("Writing to Products Google Sheet")
 with open('products.csv', encoding="utf8") as f:
     reader = csv.reader(f)
     tp = list(tuple(line) for line in reader)
-print(tp)
-UpdateValue(creds, spreadsheetID=GoogleSheetID, range='Products!A1', values=json_data)
+UpdateValue(creds, spreadsheetID=GoogleSheetID, range='Products!A1', values=tp)
 os.remove("C:/Users/akio_/PycharmProjects/ShopifyAPIGSExporter/products.csv")

@@ -1,5 +1,5 @@
 import shopify
-from values import*
+from ids_passwords_strings.values import*
 import pandas as pd
 from google_modules.googleSheets import*
 from google_modules.googleAuth import*

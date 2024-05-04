@@ -1,5 +1,5 @@
 import shopify
-from values import*
+from ids_passwords_strings.values import*
 
 
 def get_all_resources(resource_type, **kwargs):

@@ -1,15 +1,7 @@
 import shopify
-import binascii
-import os
 import time
-from values import*
-from selenium import webdriver
-from selenium import webdriver
+from ids_passwords_strings.values import*
 from selenium.webdriver.common.by import By
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.common.action_chains import ActionChains
-from selenium.common.exceptions import NoSuchElementException
 
 elementEmailLogin = "//input[@type='email']"
 elementLoginContinue = "//span[text()='Continue with email']"
