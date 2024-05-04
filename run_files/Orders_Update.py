@@ -39,4 +39,4 @@ with open('orders.csv',encoding="utf8") as f:
     to = list(tuple(line) for line in reader)
 
 UpdateValue(creds, spreadsheetID=GoogleSheetID, range='Orders!A1', values=to)
-os.remove("C:/Users/akio_/PycharmProjects/ShopifyAPIGSExporter/orders.csv")
+os.remove("C:/Users/akio_/PycharmProjects/ShopifyAPIGSExporter/run_files/orders.csv")
