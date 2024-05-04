@@ -1,8 +1,8 @@
 import shopify
 from values import*
 import pandas as pd
-from googleSheets import*
-from googleAuth import*
+from google_modules.googleSheets import*
+from google_modules.googleAuth import*
 import os.path
 import csv
 import google.auth.exceptions

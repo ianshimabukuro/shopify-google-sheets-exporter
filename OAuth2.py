@@ -1,7 +1,4 @@
-import shopify
-from values import*
-from auth_functions import*
-import urllib3
+from shopify_modules.auth_functions import*
 from urllib.parse import urlparse, parse_qs
 from selenium import webdriver
 
