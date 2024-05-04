@@ -18,11 +18,13 @@ elementLoginButton = "//span[@class='ui-button__text']"
 EMAIL_ACCOUNT = "intern@socalization.com"
 PASSWORD = "idbWHdvm"
 
+#Shopify code url
 def getauthcodeurl(session,state):
     shopify.Session.setup(api_key=client_id, secret=client_secret)
     auth_url = session.create_permission_url(['read_products','read_orders', 'read_all_orders','read_inventory'], 'https://www.socalization.com/',state)
     return auth_url
 
+#Exchange Auth code in the Auth url for an Access Token
 def authcode_for_accesstoken(session,request_params):
     access_token = session.request_token(request_params)
     return access_token
