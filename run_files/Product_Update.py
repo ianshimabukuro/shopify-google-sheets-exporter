@@ -29,7 +29,7 @@ try:
     print("Credentials Refreshed and Adquired")
 except google.auth.exceptions.RefreshError:
     print("Refresh Error, deleting token.json")
-    os.remove("token.json")
+    os.remove("../token.json")
     creds = getCred(SCOPES)
     print("Credentials Refreshed and Adquired")
 

@@ -14,7 +14,7 @@ url = getauthcodeurl(session,state)
 
 
 # Path to the WebDriver executable
-webdriver_path = '/chromedriver'
+webdriver_path = '../../chromedriver'
 
 # Start the WebDriver instance
 driver = webdriver.Chrome()
