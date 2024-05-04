@@ -3,21 +3,12 @@ from ids_passwords_strings.values import*
 import pandas as pd
 from google_modules.googleSheets import*
 from google_modules.googleAuth import*
+from shopify_modules.utility import *
 import os.path
 import csv
 import google.auth.exceptions
 
 
-def get_all_resources(resource_type, **kwargs):
-    resource_count = resource_type.count(**kwargs)
-    resources = []
-    if resource_count > 0:
-        page=resource_type.find(**kwargs)
-        resources.extend(page)
-        while page.has_next_page():
-            page = page.next_page()
-            resources.extend(page)
-    return resources
 
 session = shopify.Session(shop_url, api_version, ac_tok)
 shopify.ShopifyResource.activate_session(session)
