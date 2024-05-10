@@ -41,4 +41,5 @@ with open('products.csv', encoding="utf8") as f:
 UpdateValue(creds, spreadsheetID=GoogleSheetID, range='Products!A1', values=tp)
 
 #Delete created csv file
-os.remove("C:/Users/akio_/PycharmProjects/ShopifyAPIGSExporter/run_files/products.csv")
+os.remove(project_path + "/run_files/products.csv")
+

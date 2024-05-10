@@ -6,3 +6,5 @@ api_version ='2024-01'
 ac_tok="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"
 SCOPES="https://www.googleapis.com/auth/spreadsheets"
 GoogleSheetID='1iE7KHppmiHuP54wb6QJwuJ-KLJyS_QR93pji8nu2eiA'
+#using forward slash
+project_path = 'C:/Users/akio_/PycharmProjects/ShopifyAPIGSExporter'
