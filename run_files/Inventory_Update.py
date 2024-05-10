@@ -1,31 +1,35 @@
 import shopify
+import time
 from ids_passwords_strings.values import*
 import pandas as pd
 from google_modules.googleSheets import*
 from google_modules.googleAuth import*
+from shopify_modules.utility import *
 import os.path
 import csv
 import google.auth.exceptions
-
-
-def get_all_resources(resource_type, **kwargs):
-    resource_count = resource_type.count(**kwargs)
-    resources = []
-    if resource_count > 0:
-        page=resource_type.find(**kwargs)
-        resources.extend(page)
-        while page.has_next_page():
-            page = page.next_page()
-            resources.extend(page)
-    return resources
-
+locations_ids=[43039096968, 60906668168, 60919185544, 45357269128,65552973960]
 session = shopify.Session(shop_url, api_version, ac_tok)
 shopify.ShopifyResource.activate_session(session)
 
+
+Locations = shopify.Location.find()
+inventory_level_list = []
+for location in Locations:
+    print("next location")
+    Inventory_Level=shopify.Location.inventory_levels(location)
+    inventory_level_list.extend(Inventory_Level)
+    while Inventory_Level.has_next_page():
+        time.sleep(0.5)
+        print("next Page")
+        Inventory_Level = Inventory_Level.next_page()
+        inventory_level_list.extend(Inventory_Level)
+
+
 inventory_list = []
-inventory = get_all_resources(shopify.InventoryItem)
-for inventory_item in inventory:
-    inventory_list.append(inventory_item.attributes)
+
+for inventory_level in inventory_level_list:
+    inventory_list.append(inventory_level.attributes)
 inventory_df = pd.DataFrame(inventory_list)
 inventory_df.to_csv('inventory.csv', index=False)
 
@@ -45,4 +49,6 @@ with open('inventory.csv',encoding="utf8") as f:
     ti = list(tuple(line) for line in reader)
 
 UpdateValue(creds, spreadsheetID=GoogleSheetID, range='Inventory!A1', values=ti)
-os.remove("C:/Users/akio_/PycharmProjects/ShopifyAPIGSExporter/venv/inventory.csv")
+
+os.remove(project_path + "/run_files/inventory.csv")
+
