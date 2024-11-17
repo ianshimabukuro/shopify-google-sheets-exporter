@@ -56,32 +56,25 @@ def UpdateValue(creds,spreadsheetID,range,values):
 
 #All passwords and values
 #Shopify
-client_id = 'b852af00a43353437953ccd5d8462b1c'
-client_secret =  'c02180a8fb050a026d05004f8229437c'
-redirect_uri = 'https://www.socalization.com/'
-shop_url = 'socalization.myshopify.com'
-api_version ='2024-01'
-ac_tok="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"
+client_id = ''
+client_secret =  ''
+redirect_uri = ''
+shop_url = ''
+api_version =''
+ac_tok=""
 
 
-SCOPES="https://www.googleapis.com/auth/spreadsheets"
-GoogleSheetID='1iE7KHppmiHuP54wb6QJwuJ-KLJyS_QR93pji8nu2eiA'
+SCOPES=""
+GoogleSheetID=''
 #using forward slash
-project_path = 'C:/Users/akio_/PycharmProjects/ShopifyAPIGSExporter'
-
-
-
-
-
-
-
+project_path = 'r'
 
 
 #Initialize shopify API session
 session = shopify.Session(shop_url, api_version, ac_tok)
 shopify.ShopifyResource.activate_session(session)
 
-#Gather product list and make a csv file
+#Gather product list
 products_list = []
 print("Start retrieving")
 products = get_all_resources(shopify.Product)
