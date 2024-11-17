@@ -1,3 +1,7 @@
+"""Has not been changed from the csv/dataframfe style to the better way seen in product and order
+    in other words not guaranteed to work"""
+
+
 import shopify
 import time
 from ids_passwords_strings.values import*
