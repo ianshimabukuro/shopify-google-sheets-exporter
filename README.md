@@ -12,18 +12,18 @@ for utilizing the Google API with defined scopes.
   
 token.json: This is a credential file used to connected to the Google API. It is created automatically, so no need to do anything with it.
 
-chromedriver: This is the driver used by selenium to automate Google Chrome browser. Always download the most recent version and the one compatible
-with your computer and browser. Has to be kept inside the project folder
-
 ### Info
 Use the account associated with the Google Cloud account that the credentials.json was downloaded from when authenticating api
 Always set download and project paths adequately, with "/" not "\"
 
-### Steps
+### Steps in each individual run file
 1. Initialize Shopify API Session
 2. Obtain data from the session and store into a list
 3. Authentication of Google API Credentials
-4. Write to specific google sheet 
+4. Write to specific google sheet
+   
+### ids, secrets, codes
+You can get the access code in the passwords_ids file through the oauth_routine. The rest has to be managed in their own respective api platforms.
 
 
 
