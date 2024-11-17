@@ -17,11 +17,13 @@ orders_list = []
 print("Start retrieving")
 orders = get_all_resources(shopify.Order, status = 'any')
 print("Finished retrieving")
-for order in orders:
-    orders_list.append(order.attributes)
 
-orders_df = pd.DataFrame(orders_list)
-orders_df.to_csv('orders.csv', index=False)
+row = []
+for order in orders:
+    for key,value in order.attributes.items():
+        row.append(str(value))
+    orders_list.append(tuple(row))
+    row = []
 
 print("Authenticating Google API...")
 try:
@@ -32,12 +34,6 @@ except google.auth.exceptions.RefreshError:
     os.remove("../token.json")
     creds = getCred(SCOPES)
     print("Credentials Refreshed and Adquired")
-#Step 3
+
 print("Writing to Orders Google Sheet")
-with open('orders.csv',encoding="utf8") as f:
-    reader = csv.reader(f)
-    to = list(tuple(line) for line in reader)
-
-UpdateValue(creds, spreadsheetID=GoogleSheetID, range='Orders!A1', values=to)
-
-os.remove(project_path + "/run_files/orders.csv")
+UpdateValue(creds, spreadsheetID=GoogleSheetID, range='Orders!A2', values=orders_list)
