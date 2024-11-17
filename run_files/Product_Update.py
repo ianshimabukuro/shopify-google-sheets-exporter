@@ -12,15 +12,20 @@ import google.auth.exceptions
 session = shopify.Session(shop_url, api_version, ac_tok)
 shopify.ShopifyResource.activate_session(session)
 
-#Gather product list and make a csv file
+#Gather product list 
 products_list = []
 print("Start retrieving")
 products = get_all_resources(shopify.Product)
 print("Finished retrieving")
+
+#Format into a list of tuples
+row = []
 for product in products:
-    products_list.append(product.attributes)
-products_df = pd.DataFrame(products_list)
-products_df.to_csv('products.csv', index=False)
+    for key,value in product.attributes.items():
+        row.append(str(value))
+    products_list.append(tuple(row))
+    row = []
+
 
 #Get credentials for Google API usage
 print("Authenticating Google API...")
@@ -35,11 +40,5 @@ except google.auth.exceptions.RefreshError:
 
 #Write to specified Google Sheets
 print("Writing to Products Google Sheet")
-with open('products.csv', encoding="utf8") as f:
-    reader = csv.reader(f)
-    tp = list(tuple(line) for line in reader)
-UpdateValue(creds, spreadsheetID=GoogleSheetID, range='Products!A1', values=tp)
-
-#Delete created csv file
-os.remove(project_path + "/run_files/products.csv")
+UpdateValue(creds, spreadsheetID=GoogleSheetID, range='Products!A2', values= products_list)
 
