@@ -1,6 +1,11 @@
 """Has not been changed from the csv/dataframfe style to the better way seen in product and order
     in other words not guaranteed to work"""
+import sys
+import os
 
+# Add the project root directory to sys.path
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+print(sys.path)
 
 import shopify
 import time

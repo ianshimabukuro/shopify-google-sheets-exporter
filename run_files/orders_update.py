@@ -1,3 +1,10 @@
+import sys
+import os
+
+# Add the project root directory to sys.path
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+print(sys.path)
+
 import shopify
 from ids_passwords_strings.values import*
 import pandas as pd
